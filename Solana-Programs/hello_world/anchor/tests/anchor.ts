@@ -1,12 +1,12 @@
 import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
-import { TokenInteractionProgram } from "../target/types/token_interaction_program";
+import { Anchor } from "../target/types/anchor";
 
-describe("token-interaction-program", () => {
+describe("anchor", () => {
   // Configure the client to use the local cluster.
   anchor.setProvider(anchor.AnchorProvider.env());
 
-  const program = anchor.workspace.TokenInteractionProgram as Program<TokenInteractionProgram>;
+  const program = anchor.workspace.Anchor as Program<Anchor>;
 
   it("Is initialized!", async () => {
     // Add your test here.

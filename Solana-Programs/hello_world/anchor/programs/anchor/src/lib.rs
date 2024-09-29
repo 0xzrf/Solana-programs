@@ -1,9 +1,9 @@
 use anchor_lang::prelude::*;
 
-declare_id!("6BKjcyasHYNtsixnUz1L1B7iM399xzDdSTvueSkE82hx");
+declare_id!("9AwFcxMqCukuKytRkZvodGxcSJZConPf1eFwYiKc6GTv");
 
 #[program]
-pub mod token_interaction_program {
+pub mod anchor {
     use super::*;
 
     pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
