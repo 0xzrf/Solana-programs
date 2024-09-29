@@ -1,14 +1,20 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+use solana_program::{
+    account_info::AccountInfo, 
+    pubkey::Pubkey,
+    msg,
+    entrypoint,
+    entrypoint::ProgramResult
+};
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// Tells the solana program that this is the entrypoint, or the function to run when the instruction is called
+entrypoint!(process_instruction);
+fn process_instruction(
+    program_id: &Pubkey,// Reference to the public Key of the program
+    _address: &[AccountInfo],//
+    _instruction_data: &[u8]
+) -> ProgramResult {
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+    msg!("Hello world");
+
+    Ok(())
 }
