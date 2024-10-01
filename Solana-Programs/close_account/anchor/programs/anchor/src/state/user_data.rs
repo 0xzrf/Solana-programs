@@ -7,5 +7,6 @@ pub struct UserData{
     #[max_len(40)]
     pub user_email: String,
     #[max_len(20)]
-    pub password: String
+    pub password: String,
+    pub bump: u8
 }

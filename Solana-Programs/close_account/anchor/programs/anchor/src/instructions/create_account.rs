@@ -22,7 +22,8 @@ pub fn create_account(ctx: Context<CreateAccount>, user_id: u64, user_email: Str
     ctx.accounts.account.set_inner(UserData {
         user_id, 
         user_email,
-        password
+        password,
+        bump: ctx.bumps.account
     });
     Ok(())
 }
