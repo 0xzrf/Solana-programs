@@ -21,32 +21,26 @@ pub mod mock {
     ) -> Result<()> {
 
         msg!("Initializing the metadata_account");
+
         create_metadata_accounts_v3(
             CpiContext::new(
                 ctx.accounts.token_metadata_program.to_account_info(),
-                CreateMetadataAccountsV3 {
+                CreateMetadataAccountsV3{
                     metadata: ctx.accounts.metadata_account.to_account_info(),
                     mint: ctx.accounts.mint_account.to_account_info(),
-                    mint_authority: ctx.accounts.payer.to_account_info(),
-                    update_authority: ctx.accounts.payer.to_account_info(),
                     payer: ctx.accounts.payer.to_account_info(),
-                    system_program: ctx.accounts.system_program.to_account_info(),
                     rent: ctx.accounts.rent.to_account_info(),
-                },
+                    mint_authority: ctx.accounts.payer.to_account_info(),
+                    system_program: ctx.accounts.system_program.to_account_info(),
+                    update_authority: ctx.accounts.payer.to_account_info()
+                }
             ),
-            DataV2 {
-                name: token_name,
-                symbol: token_symbol,
-                uri: token_uri,
-                seller_fee_basis_points: 0,
-                creators: None,
-                collection: None,
-                uses: None,
-            },
-            false, // Is mutable
-            true,  // Update authority is signer
-            None,  // Collection details
+            DataV2 { name: token_name, symbol: token_symbol, uri: token_uri, seller_fee_basis_points: 0, creators: None, collection: None, uses: None },
+            false, // This token isn't mutable
+            true, // update authority is a signer
+            None // Collection details
         )?;
+
         msg!("Token created");
 
         Ok(())
