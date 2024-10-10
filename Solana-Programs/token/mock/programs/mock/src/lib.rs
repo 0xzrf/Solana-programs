@@ -78,7 +78,7 @@ pub mod mock {
 pub struct CreateNFTToken<'info> {
     #[account(mut)]
     pub payer: Signer<'info>,
-    /// Check: This ain't safe
+    /// CHECK: This ain't safe
     #[account(
         mut,
         seeds = [b"metadata", token_metadata_program.key().as_ref(), mint_account.key().as_ref()],
@@ -86,6 +86,7 @@ pub struct CreateNFTToken<'info> {
         seeds::program = token_metadata_program.key()
     )]
     pub edition_account: UncheckedAccount<'info>,
+    /// CHECK: This ain't safe either!
     #[account(
         mut,
         seeds = [b"metadata", token_metadata_program.key().as_ref(), mint_account.key().as_ref(), b"edition"],
