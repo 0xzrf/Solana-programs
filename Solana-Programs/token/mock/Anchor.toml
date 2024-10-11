@@ -4,14 +4,17 @@
 resolution = true
 skip-lint = false
 
+[programs.devnet]
+mock = "7PGhrDKEukToPT3EPawUGnV1HdkKnqBpY9vHhfKj575n"
+
 [programs.localnet]
-mock = "A2YnRqimpYk7KkW67ffMoNQtE9X3wLZJC8BcdYxbj3Sh"
+mock = "7PGhrDKEukToPT3EPawUGnV1HdkKnqBpY9vHhfKj575n"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
@@ -20,6 +23,7 @@ test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
 [test]
 startup_wait = 5000
 shutdown_wait = 2000
+upgradeable = false
 
 [test.validator]
 bind_address = "0.0.0.0"
