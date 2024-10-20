@@ -2,15 +2,11 @@ use solana_program::{
     account_info::AccountInfo, entrypoint, entrypoint::ProgramResult, pubkey::Pubkey, msg
 };
 
-entrypoint!(process_function);
+pub mod process_instruction;
+pub mod states;
+pub mod instructions;
 
-fn process_function(
-    _program_id: &Pubkey,
-    _accounts: &[AccountInfo],
-    _instruction_data: &[u8]
-) -> ProgramResult {
+use process_instruction::process_instruction;
 
-    msg!("Hello world");
 
-    Ok(())
-}
+entrypoint!(process_instruction);
