@@ -15,7 +15,7 @@ pub fn process_instruction(
     instruction_data: &[u8]
 ) -> ProgramResult {
     if let Ok(address_info) = AddressInfo::try_from_slice(instruction_data) {
-        return create_account(program_id, account_info, address_info)?;
+        return create_account(program_id, account_info, address_info);
     };
 
     Err(ProgramError::InvalidInstructionData)
