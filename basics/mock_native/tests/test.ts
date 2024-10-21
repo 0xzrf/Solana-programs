@@ -1,32 +1,45 @@
 import {ProgramTestContext, start} from "solana-bankrun"
 import { describe, test } from "node:test"
 import { assert } from "chai"
-import {PublicKey, Transaction, TransactionInstruction} from "@solana/web3.js"
+import {PublicKey, Transaction, TransactionInstruction, Keypair} from "@solana/web3.js"
+import * as borsh from "borsh"
 
+class AddressInitializer {
+    constructor(properties) {
+        for (const [key, val] of Object.entries(properties)) this[key]= val;
+    }
+}
 
-describe("testing the hello world test", async () => {
-    const PROGRAM_ID = PublicKey.unique();
-    const context = await start([{name: "mock_native", programId: PROGRAM_ID}], []);
-    const payer = context.payer
-    const client = context.banksClient
+class AddressInfo extends AddressInitializer {
+    street: any;
+    city: any;
+    name: any;
+    house_amount: any;
 
-    test("test hello world logs", async () => {
-        // console.log("Test started")
-        const blockhash = context.lastBlockhash;
+    toBuffer() {
+        return Buffer.from(borsh.serialize(AddressInfoSchema, this))
+    }
 
-        const ix = new TransactionInstruction({
-            keys: [{pubkey: payer.publicKey, isSigner: true, isWritable: true}],
-            programId: PROGRAM_ID,
-            data: Buffer.alloc(0)
-        })
+    static fromBufffer(buffer: Buffer) {
+        return borsh.deserialize(AddressInfoSchema, AddressInfo, buffer)
+    }
+}
 
-        const tx = new Transaction();
-        tx.recentBlockhash = blockhash;
-        tx.add(ix).sign(payer);
+const AddressInfoSchema = new Map([
+    [
+      AddressInfo, 
+      {
+        kind: 'struct',
+        fields: [
+          ['name', 'string'],
+          ['house_number', 'u8'],
+          ['street', 'string'],
+          ['city', 'string'],
+        ],
+      },
+    ],
+  ]);
 
-        const transaction = await client.processTransaction(tx);
-
-        assert(transaction.logMessages[0].startsWith(`Program ${PROGRAM_ID}`))
-        
-    })
+describe("Tests the functionality of the solana native program", async () => {
+    
 })
