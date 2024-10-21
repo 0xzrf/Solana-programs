@@ -41,5 +41,14 @@ const AddressInfoSchema = new Map([
   ]);
 
 describe("Tests the functionality of the solana native program", async () => {
-    
+    const addresssInfoAccount = Keypair.generate();
+    const PROGRAM_ID = PublicKey.unique();
+    const context = await start([{name: "mock_native", programId: PROGRAM_ID}], [])
+    const client = context.banksClient
+    const payer = context.payer;
+
+    it("Tests whether account is being created or not", async () => {
+        const balance = await client.getBalance(payer.publicKey)
+        console.log(balance)
+    })
 })
