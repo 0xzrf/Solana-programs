@@ -1,20 +1,10 @@
-use borsh::{BorshDeserialize, BorshSerialize};
+use borsh::{
+    BorshDeserialize,
+    BorshSerialize
+};
 
 #[derive(BorshDeserialize, BorshSerialize, Debug)]
-pub struct AddressInfo {
-    pub name: String,
-    pub house_number: u8,
-    pub street: String,
-    pub city: String,
+pub struct Counter {
+    pub count: u8
 }
 
-impl AddressInfo {
-    pub fn new(name: String, house_number: u8, street: String, city: String) -> Self {
-        AddressInfo {
-            name,
-            house_number,
-            street,
-            city,
-        }
-    }
-}
