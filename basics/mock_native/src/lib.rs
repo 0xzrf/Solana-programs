@@ -1,10 +1,8 @@
-use process_instruction::process_instructions;
-use solana_program::{
-    entrypoint
-};
+use processor::process_instruction;
+use solana_program::entrypoint;
 
-pub mod process_instruction;
 pub mod states;
 pub mod instruction;
+pub mod processor;
 
-entrypoint!(process_instructions);
+entrypoint!(process_instruction);

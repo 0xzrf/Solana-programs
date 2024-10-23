@@ -3,12 +3,26 @@ use borsh::{
     BorshSerialize
 };
 
+#[derive(BorshDeserialize, BorshSerialize, Debug)]
+pub struct IncrementPageVists {}
 
-#[derive(BorshDeserialize, BorshSerialize)]
-pub struct User {
-    pub name: String
+
+#[derive(BorshDeserialize, BorshSerialize, Debug)]
+pub struct PageVisits {
+    page_visits: u32,
+    pub bump: u8
 }
 
-impl User {
-    pub const seed_prefix: &[u8] = b"User";
+impl PageVisits {
+    pub const ACCOUNT_SPACE: usize = 8 + 32;
+
+    pub const SEED_PREFIX: &'static str = "page_visits";
+
+    pub fn new(page_visits: u32, bump: u8) -> Self {
+        PageVisits { page_visits, bump }
+    }
+
+    pub fn increment(&mut self) {
+        self.page_visits += 1;
+    }
 }
